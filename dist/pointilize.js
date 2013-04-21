@@ -25,17 +25,15 @@
         if (!options) {
           throw "You must pass options";
         }
-        if (!(options.canvas && (options.canvas.length = 1))) {
-          throw "You must pass canvas";
-        }
         if (!options.imgSrc) {
           throw "You must pass imgSrc";
         }
-        this.canvas = options.canvas;
         this.imgSrc = options.imgSrc;
-        this.ctx = this.canvas.getContext('2d');
-        this.setDimensions();
+        this.docWidth = jQuery(window).width();
+        this.docHeight = Math.floor(this.docWidth * 0.75);
         this.createCanvas(this.docWidth, this.docHeight);
+        this.ctx = this.$el[0].getContext('2d');
+        this.setDimensions();
         this.createImage(this.docWidth, this.docHeight);
         if (options.interactive) {
           this.setupMouseEvents();
@@ -74,7 +72,7 @@
         return this.drawCell(x + 1, y, cell, ctx);
       };
 
-      Pointilize.prototype.drawImageData = function(width, height, ctx, myImage) {
+      Pointilize.prototype.drawImageData = function(width, height, myImage) {
         var counter, data, i, imgd, n, pix, row;
         ctx.drawImage(myImage, 0, 0, width, height);
         imgd = ctx.getImageData(0, 0, width, height);
@@ -100,11 +98,10 @@
       };
 
       Pointilize.prototype.createCanvas = function(width, height) {
-        var canvas, ctx;
-        canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        return ctx = canvas.getContext("2d");
+        this.$el = $('<canvas>');
+        $('body').append(this.$el);
+        this.$el.height(width);
+        return this.$el.width(height);
       };
 
       Pointilize.prototype.createImage = function(width, height) {
@@ -112,7 +109,7 @@
           _this = this;
         myImage = new Image();
         myImage.onload = function() {
-          return _this.drawImageData(width, height, ctx, myImage);
+          return _this.drawImageData(width, height, myImage);
         };
         return myImage.src = this.imgSrc;
       };
@@ -126,12 +123,7 @@
         });
       };
 
-      Pointilize.prototype.setDimensions = function() {
-        this.docWidth = jQuery(window).width();
-        this.docHeight = Math.floor(this.docWidth * 0.75);
-        this.canvas.setAttribute("height", this.docHeight);
-        return this.canvas.setAttribute("width", this.docWidth);
-      };
+      Pointilize.prototype.setDimensions = function() {};
 
       return Pointilize;
 
