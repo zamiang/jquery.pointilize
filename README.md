@@ -21,16 +21,11 @@ Include required Javascripts
 <script src="dist/pointilize.min.js"></script>
 ```
 
-Create html like this
-```html
-  <canvas></canvas>
-```
-
 Apply the pointilize plugin
 
 ```javascript
-var img = new Pointilize({
-  canvas: $('canvas'),
+var p = new Pointilize
+p.initialize({
   imgSrc: 'foo.jpg',
   interactive: true
 });
