@@ -5,8 +5,7 @@
 (function() {
 
   (function($, window, document) {
-    var Pointilize;
-    Pointilize = (function() {
+    return window.Pointilize = (function() {
 
       function Pointilize() {}
 
@@ -15,7 +14,7 @@
         y: -1
       };
 
-      Pointilize.prototype.cellSize = 5;
+      Pointilize.prototype.cellSize = 3;
 
       Pointilize.prototype.brushSize = 2;
 
@@ -30,10 +29,15 @@
         }
         this.imgSrc = options.imgSrc;
         this.docWidth = jQuery(window).width();
-        this.docHeight = Math.floor(this.docWidth * 0.75);
+        this.docHeight = jQuery(window).height();
+        if (options.cellSize) {
+          this.cellSize = options.cellSize;
+        }
+        if (options.brushSize) {
+          this.brushSize = options.brushSize;
+        }
         this.createCanvas(this.docWidth, this.docHeight);
         this.ctx = this.$el[0].getContext('2d');
-        this.setDimensions();
         this.createImage(this.docWidth, this.docHeight);
         if (options.interactive) {
           this.setupMouseEvents();
@@ -42,20 +46,20 @@
       };
 
       Pointilize.prototype.draw = function() {
-        var n, nn, x, y, _results;
+        var ctx, n, nn, x, y;
         y = this.cellSize;
         n = this.data.length;
-        _results = [];
+        ctx = this.$el[0].getContext('2d');
         while (y < n) {
           nn = this.data[0].length;
           x = this.cellSize;
-          while (y < nn) {
+          while (x < nn) {
             this.drawCell(x, y, this.data[y][x], this.ctx);
             x += this.cellSize;
           }
-          _results.push(x += this.cellSize);
+          y += this.cellSize;
         }
-        return _results;
+        return this.ctx = ctx;
       };
 
       Pointilize.prototype.drawCell = function(x, y, cell, ctx) {
@@ -74,8 +78,8 @@
 
       Pointilize.prototype.drawImageData = function(width, height, myImage) {
         var counter, data, i, imgd, n, pix, row;
-        ctx.drawImage(myImage, 0, 0, width, height);
-        imgd = ctx.getImageData(0, 0, width, height);
+        this.ctx.drawImage(myImage, 0, 0, width, height);
+        imgd = this.ctx.getImageData(0, 0, width, height);
         pix = imgd.data;
         row = 0;
         counter = 0;
@@ -84,7 +88,7 @@
         n = pix.length;
         while (i < n) {
           data[row][counter] = [pix[i], pix[i + 1], pix[i + 2]];
-          if (counter >= (width(-1))) {
+          if (counter >= (width - 1)) {
             counter = 0;
             row++;
             data[row] = [];
@@ -94,14 +98,15 @@
           i += this.incriment;
         }
         this.data = data;
+        this.ctx.clearRect(0, 0, this.docWidth, this.docHeight);
         return this.draw();
       };
 
       Pointilize.prototype.createCanvas = function(width, height) {
-        this.$el = $('<canvas>');
+        this.$el = $("<canvas width=" + width + " height=" + height + ">");
         $('body').append(this.$el);
-        this.$el.height(width);
-        return this.$el.width(height);
+        this.$el.height(height);
+        return this.$el.width(width);
       };
 
       Pointilize.prototype.createImage = function(width, height) {
@@ -123,16 +128,9 @@
         });
       };
 
-      Pointilize.prototype.setDimensions = function() {};
-
       return Pointilize;
 
     })();
-    return window.Pointilize = function(options) {
-      var pointilize;
-      pointilize = new Pointilize;
-      return pointilize.initialize(options);
-    };
   })(jQuery, window, document);
 
 }).call(this);

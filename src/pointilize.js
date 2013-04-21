@@ -26,6 +26,12 @@
         this.imgSrc = options.imgSrc;
         this.docWidth = jQuery(window).width();
         this.docHeight = jQuery(window).height();
+        if (options.cellSize) {
+          this.cellSize = options.cellSize;
+        }
+        if (options.brushSize) {
+          this.brushSize = options.brushSize;
+        }
         this.createCanvas(this.docWidth, this.docHeight);
         this.ctx = this.$el[0].getContext('2d');
         this.createImage(this.docWidth, this.docHeight);

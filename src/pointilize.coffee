@@ -28,6 +28,8 @@
       @imgSrc = options.imgSrc
       @docWidth = jQuery(window).width()
       @docHeight = jQuery(window).height()
+      @cellSize = options.cellSize if options.cellSize
+      @brushSize = options.brushSize if options.brushSize
       @createCanvas @docWidth, @docHeight
       @ctx = @$el[0].getContext('2d')
 

@@ -27,7 +27,9 @@ Apply the pointilize plugin
 var p = new Pointilize
 p.initialize({
   imgSrc: 'foo.jpg',
-  interactive: true
+  interactive: true,
+  cellSize: 3,
+  brushSize: 2
 });
 ```
 
