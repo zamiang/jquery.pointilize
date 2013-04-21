@@ -1,35 +1,17 @@
-describe "$.fn.popLockIt", ->
+describe "Pointilize", ->
 
-  it "should be chainable", ->
-    item = $el.popLockIt
-      columnSelector  : '.column'
-      feedItems       : $el.children()
-      onScroll        : (-> )
-      preventFixed    : false
-      additionalFeedItemInit: (-> )
+  it "should require options to be passed in", ->
+    expect( -> new Pointilize()).toThrow new Error("You must pass options")
 
-    $el.should == item
+  it "should require canvas to be passed in", ->
+    expect( -> new Pointilize({})).toThrow new Error("You must pass canvas")
 
-  it "should require settings to be passed in", ->
-    expect( -> $el.popLockIt()).toThrow new Error("You must pass settings")
+  it "should require imgSrc to be passed in", ->
+    expect( -> new Pointilize({canvas: true})).toThrow new Error("You must pass imgSrc")
 
-  it "should require being called on one element", ->
-    expect( -> $.fn.popLockIt(
-      feedItems      : $el.children()
-      columnSelector : '.column'
-    )).toThrow new Error("PopLockIt must be called on one element")
-
-  it "should require being called on one element", ->
-    $("<div class='test-container'><div class='feeditem'><div class='column'></div><div class='column'></div></div></div>").appendTo('body')
-    $("<div class='test-container'><div class='feeditem'><div class='column'></div><div class='column'></div></div></div>").appendTo('body')
-    window.$el = $('.test-container')
-    expect( -> $el.popLockIt(
-      feedItems      : $el.children()
-      columnSelector : '.column'
-    )).toThrow new Error("PopLockIt must be called on one element")
-
-  it "sould raise error on invalid method", ->
-    $el.popLockIt
-      feedItems      : $el.children()
-      columnSelector : '.column'
-    expect( -> $el.popLockIt('invalid')).toThrow new Error("Method 'invalid' does not exist on jQuery.popLockIt")
+  it "should initialize without errors", ->
+    expect( -> new Pointilize({
+      canvas      : $el
+      interactive : true
+      imgSrc      : 'wtf'
+    })).toThrow new Error("Pointilize must be called on one element")

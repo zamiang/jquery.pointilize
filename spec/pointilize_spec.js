@@ -1,49 +1,31 @@
 (function() {
 
-  describe("$.fn.popLockIt", function() {
-    it("should be chainable", function() {
-      var item;
-      item = $el.popLockIt({
-        columnSelector: '.column',
-        feedItems: $el.children(),
-        onScroll: (function() {}),
-        preventFixed: false,
-        additionalFeedItemInit: (function() {})
-      });
-      return $el.should === item;
-    });
-    it("should require settings to be passed in", function() {
+  describe("Pointilize", function() {
+    it("should require canvas to be passed in", function() {
       return expect(function() {
-        return $el.popLockIt();
-      }).toThrow(new Error("You must pass settings"));
+        return new Pointilize();
+      }).toThrow(new Error("You must pass canvas"));
     });
-    it("should require being called on one element", function() {
+    it("should require canvas to be passed in", function() {
       return expect(function() {
-        return $.fn.popLockIt({
-          feedItems: $el.children(),
-          columnSelector: '.column'
+        return new Pointilize({});
+      }).toThrow(new Error("You must pass canvas"));
+    });
+    it("should require imgSrc to be passed in", function() {
+      return expect(function() {
+        return new Pointilize({
+          canvas: true
         });
-      }).toThrow(new Error("PopLockIt must be called on one element"));
+      }).toThrow(new Error("You must pass imgSrc"));
     });
-    it("should require being called on one element", function() {
-      $("<div class='test-container'><div class='feeditem'><div class='column'></div><div class='column'></div></div></div>").appendTo('body');
-      $("<div class='test-container'><div class='feeditem'><div class='column'></div><div class='column'></div></div></div>").appendTo('body');
-      window.$el = $('.test-container');
+    return it("should initialize without errors", function() {
       return expect(function() {
-        return $el.popLockIt({
-          feedItems: $el.children(),
-          columnSelector: '.column'
+        return new Pointilize({
+          canvas: $el,
+          interactive: true,
+          imgSrc: 'wtf'
         });
-      }).toThrow(new Error("PopLockIt must be called on one element"));
-    });
-    return it("sould raise error on invalid method", function() {
-      $el.popLockIt({
-        feedItems: $el.children(),
-        columnSelector: '.column'
-      });
-      return expect(function() {
-        return $el.popLockIt('invalid');
-      }).toThrow(new Error("Method 'invalid' does not exist on jQuery.popLockIt"));
+      }).toThrow(new Error("Pointilize must be called on one element"));
     });
   });
 
