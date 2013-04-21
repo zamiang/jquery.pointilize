@@ -1,46 +1,38 @@
-[![build status](https://api.travis-ci.org/zamiang/jquery.poplockit.png)](http://travis-ci.org/zamiang/jquery.poplockit)
+[![build status](https://api.travis-ci.org/zamiang/jquery.pointilize.png)](http://travis-ci.org/zamiang/jquery.pointilize)
 
-# jQuery.popLockIt
+# jQuery.pointilize
 
-A jQuery plugin for 'locking' short content in place as the user
-scrolls by longer content. For example, it will lock metadata and
-share buttons in place as the user scrolls by a long essay or series
-of images.
+Pointilizes an image using html5 canvas. Takes an image and draws
+every #cellSize pixel. The user can rollover the image to draw in the
+additional pixels
 
-This is used for the feed on [Artsy](http://artsy.net)
+For documentation, usage and examples please see
+http://zamiang.github.com/jquery.pointilize/
 
-For documentation, usage and examples please see http://zamiang.github.com/jquery.poplockit/
-
-See [this example](http://htmlpreview.github.com/?https://github.com/zamiang/jquery.poplockit/blob/master/example/index.html) using [Placekitten](http://placekitten.com/)
+See [this example](http://htmlpreview.github.com/?https://github.com/zamiang/jquery.pointilize/blob/master/example/index.html)
 
 ## Usage
 
-Download the [production version](https://raw.github.com/zamiang/jquery.poplockit/master/dist/jquery.poplockit.min.js) or the [development version](https://raw.github.com/zamiang/jquery.poplockit/master/dist/jquery.poplockit.js).
+Download the [production version](https://raw.github.com/zamiang/jquery.pointilize/master/dist/jquery.pointilize.min.js) or the [development version](https://raw.github.com/zamiang/jquery.pointilize/master/dist/jquery.pointilize.js).
 
 Include required Javascripts
 ```html
 <script src="jquery.js"></script>
-<script src="dist/poplockit.min.js"></script>
+<script src="dist/pointilize.min.js"></script>
 ```
 
 Create html like this
 ```html
-  <div id="feed">
-    <article>
-      <div class="column">Left</div>
-      <div class="column">Center</div>
-      <div class="column">Right</div>
-    </article>
-    ...
-  </div>
+  <canvas></canvas>
 ```
 
-Apply the popLockIt plugin
+Apply the pointilize plugin
 
 ```javascript
-$('#feed').popLockIt({
-  feedItems      : $('#feed > article'),
-  columnSelector : '> .column'
+var img = new Pointilize({
+  canvas: $('canvas'),
+  imgSrc: 'foo.jpg',
+  interactive: true
 });
 ```
 
