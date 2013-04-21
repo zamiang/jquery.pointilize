@@ -25,8 +25,8 @@ class Pointilize
     return unless imgSrc
     @canvas = canvas
     @imgSrc = imgSrc
-  	@ctx = @canvas.getContext('2d')
-      
+    @ctx = @canvas.getContext('2d')
+
     @setDimensions()
     @createCanvas @docWidth, @docHeight
     @createImage @docWidth, @docHeight

@@ -1,7 +1,7 @@
 {
-    "name": "jquery.poplockit",
+    "name": "jquery.pointilize",
     "version": "0.1.1",
-    "main": "dist/jquery.poplockit",
+    "main": "dist/jquery.pointilize",
     "engines": {
         "node": ">= 0.6.0"
     },

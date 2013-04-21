@@ -1,0 +1,32 @@
+{
+    "name": "pointilize",
+    "title": "jQuery.pointilize",
+    "description": "Pointilizes an image using html5 canvas. Takes an image and draws every #cellSize pixel. The user can rollover the image to draw in the additional pixels.",
+    "keywords": ["image"],
+    "version": "0.1.0",
+    "author": {
+        "name": "Brennan Moore",
+        "email": "brennanmoore@gmail.com",
+        "url": "http://zamiang.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/zamiang/jquery.pointilize.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zamiang/jquery.pointilize/issues"
+    },
+    "homepage": "http://zamiang.github.com/jquery.pointilize",
+    "download": "https://github.com/zamiang/jquery.pointilize",
+    "bugs": "https://github.com/zamiang/jquery.pointilize/issues",
+    "docs": "http://zamiang.github.com/jquery.pointilize",
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/zamiang/jquery.pointilize/blob/master/LICENSE-MIT"
+        }
+    ],
+    "dependencies": {
+        "jquery": ">=1.7"
+    }
+}
